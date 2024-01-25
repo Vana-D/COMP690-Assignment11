@@ -10,9 +10,25 @@
 <body>
     <main>
         <h1>Zak's Life in a Slide Show</h1>
-        <p><input type="button" id="play_pause" value="Pause"></p>
+        <p>
+            <input type="button" id="play_pause" value="Pause">
+            <input type="button" id="speed" value="Speed">
+        </p>
         <p><img src="images/wakeboard.jpg" id="image" alt=""></p>
         <p><span id="caption">He likes to wakeboard</span></p>
+        <br>
+        <div class="instructions">
+            <p>To set the speed for slideshow: </p>
+            <p>1. Click Pause Button </p>
+            <p>2. Click Speed Button</p>
+            <p>3. Click Resume Button </p>
+            <p>The SPEED is set to 
+                <span id="seconds" style="color:blue;font-weight:bold;"></span>
+                 milliseconds.
+            </p>
+        </div>
     </main>
+   
+
 </body>
 </html>

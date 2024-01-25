@@ -3,10 +3,11 @@ const $ = (id) => document.getElementById(id)
 
 const createSlideshow = function () {
     // PRIVATE VARIABLES AND FUNCTIONS
-    let timer
-    let play = true    
-    let nodes = { image: null, caption: null }
-    let img = { cache: [], counter: 0 }
+    let speed = 2000;
+    let timer;
+    let play = true;    
+    let nodes = { image: null, caption: null };
+    let img = { cache: [], counter: 0 };
     
     const stopSlideShow = function () {
         clearInterval(timer)
@@ -35,17 +36,17 @@ const createSlideshow = function () {
     return {
         loadImages: function (slides) {
             for (let i = 0; i < slides.length; i++) {
-                let image = new Image()
-                image.src = slides[i].href
-                image.title = slides[i].title
-                img.cache.push(image)
+                let image = new Image();
+                image.src = slides[i].href;
+                image.title = slides[i].title;
+                img.cache.push(image);
             }
             return this
         },
         startSlideShow: function () {
             if (arguments.length === 2) {
-                nodes.image = arguments[0]
-                nodes.caption = arguments[1]
+                nodes.image = arguments[0];
+                nodes.caption = arguments[1];
             }
             timer = setInterval(displayNextImage, 2000)
             return this
@@ -61,11 +62,26 @@ const createSlideshow = function () {
                 } else {
                     me.startSlideShow();
                 }
-                setPlayText(this)
+                setPlayText(this);
                 // TOGGLE PLAY 'FLAG'
                 play = !play
             }
-        }
+        },
+        obtainSpeed: function () {
+            const getSpeed = () => {
+              let setSpeed = parseInt(prompt('Enter speed'));
+              speed = setSpeed;
+              console.log(`The speed is now set to ${speed}`);
+              document.getElementById('seconds').innerHTML = speed;
+            };
+            return getSpeed;
+          },
+        setSpeed: function () {
+            const setSpeed = () => {
+              timer = setInterval(displayNextImage, speed);
+            };
+            return setSpeed;
+        },
     }
 }
 
@@ -85,4 +101,5 @@ window.addEventListener('load', () => {
     slideshow.loadImages(slides).startSlideShow($('image'), $('caption'))
     // PAUSE THE SLIDESHOW
     $('play_pause').onclick = slideshow.createToggleHandler()
-})
+    $('speed').onclick = slideshow.obtainSpeed();
+});
